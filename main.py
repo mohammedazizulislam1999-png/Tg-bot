@@ -15,79 +15,80 @@ client = TelegramClient(
 @client.on(events.NewMessage(pattern=r'(?i)^apay$'))
 async def pay(event):
     await event.reply("""
-💳 **ARS TOPUP BD — PAYMENT GATEWAY**
-═════════════════════════
+╔══════════════════════╗
+      💳 Pᴀʏᴍᴇɴᴛ Mᴇᴛʜᴏᴅs
+╚══════════════════════╝
 
-🏷️ **bKash (Merchant)**
-▶ `01331202837`
+🟣 ʙKᴀsʜ • Mᴇʀᴄʜᴀɴᴛ
+╭────────────────────╮
+│ `01331202837`
+╰────────────────────╯
 
-🏷️ **bKash (Personal)**
-▶ `01957858795`
+🟣 ʙKᴀsʜ • Pᴇʀsᴏɴᴀʟ
+╭────────────────────╮
+│ `01957858795`
+╰────────────────────╯
 
-🏷️ **Nagad (Personal)**
-▶ `01957858795`
+🟠 Nᴀɢᴀᴅ • Pᴇʀsᴏɴᴀʟ
+╭────────────────────╮
+│ `01957858795`
+╰────────────────────╯
 
-🏷️ **Rocket (Personal)**
-▶ `01957858795`
+🔵 Rᴏᴄᴋᴇᴛ • Pᴇʀsᴏɴᴀʟ
+╭────────────────────╮
+│ `01957858795`
+╰────────────────────╯
 
-🏷️ **Upay (Personal)**
-▶ `01957858795`
+🟢 Uᴘᴀʏ • Pᴇʀsᴏɴᴀʟ
+╭────────────────────╮
+│ `01957858795`
+╰────────────────────╯
 
-═════════════════════════
-⚠️ *টাকা পাঠানোর পর অবশ্যই Transaction ID অথবা Screenshot প্রদান করুন।*
+━━━━━━━━━━━━━━━━━━━━━━
+
+📌 Payment করার পর Screenshot, Transaction ID,
+Sender Number এবং Amount পাঠান।
+
+⚡ Verification Time: 1–10 Minutes
+
+❤️ Thank You For Choosing ARS TOPUP BD
 """)
-
-# =========================
-# PRIVATE AUTO CALCULATOR
-# =========================
 
 @client.on(events.NewMessage)
 async def auto_calc(event):
-
-    # শুধু আপনার নিজের message
     if not event.out:
         return
-
     try:
         text = event.raw_text.strip()
 
-        # Command ignore
         if text.startswith("/"):
             return
 
-        # শুধু operator থাকলে calculator চলবে
-        if not any(op in text for op in ["+", "-", "*", "/"]):
+        if not any(op in text for op in ["+","-","*","/"]):
             return
 
-        # শুধু valid character allow
         allowed = "0123456789+-*/(). "
-
         if not all(ch in allowed for ch in text):
             return
 
         result = eval(text)
 
         await event.reply(f"""
-✓ Cᴀʟᴄᴜʟᴀᴛɪᴏɴ Cᴏᴍᴘʟᴇᴛᴇᴅ
+╭━━━━━━━━━━━━━━━━━━━━╮
+      ✦ 𝗔𝗥𝗦 𝗖𝗔𝗟𝗖 ✦
+╰━━━━━━━━━━━━━━━━━━━━╯
 
-➦ Iɴᴘᴜᴛ :
-➥ `{text}`
+🧮 Calculation Successful
 
-➦ Rᴇsᴜʟᴛ :
-➥ `{result}`
+📥 Input
+└➤ `{text}`
 
-━━━━━━━━━━━━━━━━━━
+📤 Result
+└➤ `{result}`
+
+━━━━━━━━━━━━━━━━━━━━
+⚡ ARS TOPUP BD
 """)
-
-    except ZeroDivisionError:
-        await event.reply("""
-❌ Cᴀʟᴄᴜʟᴀᴛɪᴏɴ Fᴀɪʟᴇᴅ
-
-➥ Cannot divide by zero.
-
-━━━━━━━━━━━━━━━━━━
-""")
-
     except Exception:
         pass
 
